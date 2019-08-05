@@ -46,7 +46,7 @@ class AdvancedSearchForm extends React.Component {
         <Formik
           initialValues={this.initialValues}
           onSubmit={(values, actions) => this.props.onSearch(values)}
-          validateOnChange={false}
+          validateOnChange={true}
           validate={values => {
             try {
               validationSchema.validateSync(values, {abortEarly: false})
