@@ -17,12 +17,14 @@ const PersonSearchButtonGroup = ({
         className="btn person-search-button search"
         onClick={onSubmit}
         disabled={!canSearch}
+        type='submit'
       >
         {total === null && isFetching ? LoadingIndicator : 'Search'}
       </button>
       <button
         className="btn person-search-button clear"
         onClick={onCancel}
+        type='button'
       >
         Clear
       </button>

@@ -23,5 +23,5 @@ export default class ApproximateAgeSelect extends React.Component {
 }
 
 ApproximateAgeSelect.propTypes = {
-  selected: PropTypes.bool,
+  selected: PropTypes.string,
 }

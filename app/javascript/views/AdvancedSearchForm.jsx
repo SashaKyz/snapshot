@@ -36,7 +36,7 @@ class AdvancedSearchForm extends React.Component {
     return values.lastName.length > 0 ||
       values.clientId.match(/\d{4}-\d{4}-\d{4}-\d{7}/g) ||
       values.ssn.match(/\d{3}-\d{2}-\d{4}/g) ||
-      values.dateOfBirth
+      values.dateOfBirth !== null
   }
 
   render() {
@@ -105,8 +105,8 @@ class AdvancedSearchForm extends React.Component {
               </div>
               <PersonSearchButtonGroup
                 onCancel={() => {
-                  this.inputRef.current.clear()
                   resetForm(this.initialValues)
+                  this.inputRef.current.clear()
                 }}
                 onSubmit={handleSubmit}
                 canSearch={this.isSearchDisabled(values)}
