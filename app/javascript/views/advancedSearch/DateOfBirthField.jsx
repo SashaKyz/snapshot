@@ -25,6 +25,7 @@ class DateOfBirthField extends React.Component {
             id='search-date-of-birth'
             value={this.state.value}
             onChange={value => this.setState({value}, () => setFieldValue('dateOfBirth', value ? moment(value).format('YYYY-MM-DD') : null))}
+            placeholder='MM/DD/YYYY'
             time={false}
           />}
         />
