@@ -31,11 +31,11 @@ describe('AdvancedSearchForm', () => {
     expect(formik.prop('validate')).toEqual(jasmine.any(Function))
   })
 
-  it('renders a formik form that does not validate on change', () => {
+  it('renders a formik form that validates on change', () => {
     const advancedSearchForm = shallow(<AdvancedSearchForm />)
     const formik = advancedSearchForm.find('Formik')
     expect(formik.exists()).toEqual(true)
-    expect(formik.prop('validateOnChange')).toEqual(false)
+    expect(formik.prop('validateOnChange')).toEqual(true)
   })
 
   it('renders a formik form that calls onSearch on submit', () => {
