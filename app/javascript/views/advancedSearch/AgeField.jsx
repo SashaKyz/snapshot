@@ -18,8 +18,7 @@ export default class AgeField extends React.Component {
   }
 
   clear() {
-    if(this.state.selected === 'dob')
-      this.inputRef.current.clear()
+    if (this.state.selected === 'dob') { this.inputRef.current.clear() }
     this.setState(this.initialState)
   }
 
