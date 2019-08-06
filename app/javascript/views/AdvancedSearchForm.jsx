@@ -5,7 +5,7 @@ import {Formik, Form, Field, ErrorMessage} from 'formik'
 import ErrorMessages from 'common/ErrorMessages'
 import MaskedInput from 'react-maskedinput'
 import PersonSearchButtonGroup from 'common/search/PersonSearchButtonGroup'
-import {search} from 'actions/peopleSearchActions'
+import {search, clear} from 'actions/peopleSearchActions'
 import AgeField from 'views/advancedSearch/AgeField'
 import {validationSchema} from 'views/advancedSearch/AdvancedSearchValidationSchema'
 import {
@@ -40,12 +40,12 @@ class AdvancedSearchForm extends React.Component {
   }
 
   render() {
-    const {total, isFetching} = this.props
+    const {total, isFetching, onClear, onSearch} = this.props
     return (
       <div>
         <Formik
           initialValues={this.initialValues}
-          onSubmit={(values, actions) => this.props.onSearch(values)}
+          onSubmit={(values, actions) => onSearch(values)}
           validateOnChange={true}
           validate={values => {
             try {
@@ -107,6 +107,7 @@ class AdvancedSearchForm extends React.Component {
                 onCancel={() => {
                   resetForm(this.initialValues)
                   this.inputRef.current.clear()
+                  onClear()
                 }}
                 onSubmit={handleSubmit}
                 canSearch={this.isSearchDisabled(values)}
@@ -121,6 +122,7 @@ class AdvancedSearchForm extends React.Component {
 
 AdvancedSearchForm.propTypes = {
   isFetching: PropTypes.bool,
+  onClear: PropTypes.func,
   onSearch: PropTypes.func,
   total: PropTypes.number,
 }
@@ -131,6 +133,7 @@ const mapStateToProps = (state) => ({
 })
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onSearch: (values, isAdvancedSearchOn = true) => dispatch(search(ownProps.isClientOnly, isAdvancedSearchOn, values, 0)),
+  onClear: () => dispatch(clear('results')),
 })
 
 export {AdvancedSearchForm}
