@@ -4,7 +4,7 @@
 project_name = "intake_accelerator#{ENV['BUILD_NUMBER']}"
 release_args = "-p #{project_name} -f docker/release/docker-compose.yml"
 test_args = "-p #{project_name}_test -f docker/test/docker-compose.yml"
-bubble_args = '-f integrated-test-environment/docker-compose.bubble.yml'
+bubble_args = '-f acceptance_testing/bubble/docker-compose.bubble.yml'
 
 if ENV['GIT_BRANCH'] == 'origin/master'
   puts '==> Tearing down the bubble'
