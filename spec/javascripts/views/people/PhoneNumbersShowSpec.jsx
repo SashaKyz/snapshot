@@ -24,7 +24,7 @@ describe('PhoneNumbersShow', () => {
     const phoneNumberShowFields = component.find(
       'ShowField[label="Phone Number"]'
     )
-    expect(phoneNumberShowFields.find('ShowField p')
+    expect(phoneNumberShowFields.find('ShowField div')
       .at(0).props()['x-ms-format-detection']).toEqual('none')
     expect(phoneNumberShowFields.length).toEqual(2)
     expect(
