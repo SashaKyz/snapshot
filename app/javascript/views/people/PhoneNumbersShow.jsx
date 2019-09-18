@@ -13,9 +13,9 @@ const PhoneNumbersShow = ({phoneNumbers}) => (
             label="Phone Number"
             errors={errors}
           >
-            <p x-ms-format-detection="none">
+            <div x-ms-format-detection="none">
               {number}
-            </p>
+            </div>
           </ShowField>
           <ShowField gridClassName="col-md-4" label="Extension">
             {extension}
