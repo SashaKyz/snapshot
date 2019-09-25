@@ -4,7 +4,7 @@ import {delay} from 'redux-saga'
 import {logEvent} from 'utils/analytics'
 import {fetchPeopleSearchSaga, fetchPeopleSearch, getPeopleEffect} from 'sagas/fetchPeopleSearchSaga'
 import {PEOPLE_SEARCH_FETCH, search, fetchSuccess, fetchFailure} from 'actions/peopleSearchActions'
-import {getStaffIdSelector} from 'selectors/userInfoSelectors'
+import {getStaffIdSelector, getCountyNameSelector} from 'selectors/userInfoSelectors'
 import {selectSearchResultsCurrentRow} from 'selectors/peopleSearchSelectors'
 
 describe('fetchPeopleSearchSaga', () => {
@@ -45,6 +45,7 @@ describe('fetchPeopleSearch', () => {
   it('fetches people search results successfully', () => {
     const staff_id = '0x4'
     const size = 25
+    const county = 'Sacramento'
     const searchResults = {
       hits: {
         total: 0,
@@ -69,10 +70,14 @@ describe('fetchPeopleSearch', () => {
     expect(peopleSearchGenerator.next(searchResults).value).toEqual(
       select(getStaffIdSelector)
     )
-    expect(peopleSearchGenerator.next(staff_id).value).toEqual(put(fetchSuccess(searchResults)))
+    expect(peopleSearchGenerator.next(staff_id).value).toEqual(
+      select(getCountyNameSelector)
+    )
+    expect(peopleSearchGenerator.next(county).value).toEqual(put(fetchSuccess(searchResults)))
     expect(peopleSearchGenerator.next().value).toEqual(call(logEvent, 'personSearch', {
       staffId: staff_id,
       totalResults: searchResults.hits.total,
+      county: county,
     }))
   })
 })
