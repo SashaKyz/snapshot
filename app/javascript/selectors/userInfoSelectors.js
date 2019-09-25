@@ -13,6 +13,11 @@ export const getStaffIdSelector = createSelector(
   (userInfo) => userInfo.get('staff_id')
 )
 
+export const getCountyNameSelector = createSelector(
+  getUserInfo,
+  (userInfo) => userInfo.get('county')
+)
+
 export const userPrivilegesSelector = createSelector(
   getUserInfo,
   (userInfo) => userInfo.get('privileges') || List()

@@ -3,6 +3,7 @@ import {
   getUserNameSelector,
   userPrivilegesSelector,
   getStaffIdSelector,
+  getCountyNameSelector,
 } from 'selectors/userInfoSelectors'
 import * as matchers from 'jasmine-immutable-matchers'
 
@@ -40,6 +41,14 @@ describe('userInfoSelectors', () => {
     it('returns an empty list when there are no privileges', () => {
       const state = fromJS({userInfo: {}})
       expect(userPrivilegesSelector(state)).toEqual(List())
+    })
+  })
+
+  describe('getCountyNameSelector', () => {
+    it('returns county', () => {
+      const userInfo = {county: 'Sacramento'}
+      const state = fromJS({userInfo})
+      expect(getCountyNameSelector(state)).toEqual('Sacramento')
     })
   })
 })
