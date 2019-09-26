@@ -46,7 +46,7 @@ export function* fetchPeopleSearch({payload: {isClientOnly, isAdvancedSearchOn, 
     yield call(logEvent, 'personSearch', {
       staffId: staffId,
       totalResults: response.hits.total,
-      county: county,
+      staff_county: county,
     })
   } catch (error) {
     yield put(fetchFailure(error))
