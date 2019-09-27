@@ -77,7 +77,7 @@ describe('fetchPeopleSearch', () => {
     expect(peopleSearchGenerator.next().value).toEqual(call(logEvent, 'personSearch', {
       staffId: staff_id,
       totalResults: searchResults.hits.total,
-      county: county,
+      staff_county: county,
     }))
   })
 })
