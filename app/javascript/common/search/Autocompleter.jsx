@@ -210,7 +210,11 @@ export default class Autocompleter extends Component {
       const enterKeyCode = 13
       if ((canSearch && e.charCode === enterKeyCode)) { this.handleSubmit() }
     }
-    const validateAndSetDateOfBirth = (e) => { if (isValidDate(e.target.value)) { onChange('dateOfBirth', moment(e.target.value).format('YYYY-MM-DD')) } }
+    const validateAndSetDateOfBirth = (e) => {
+      if ((e.target.value === '') || (e.target.value === undefined) || (e.target.value === null)) {
+        onChange('dateOfBirth', '')
+      } else if (isValidDate(e.target.value)) { onChange('dateOfBirth', moment(e.target.value).format('YYYY-MM-DD')) }
+    }
     return (
       <PersonSearchFields
         onBlur={onBlur}
