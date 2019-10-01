@@ -547,6 +547,63 @@ describe('<Autocompleter />', () => {
       personSearchFields.simulate('keypress', {charCode: 13})
       expect(onSearch).toHaveBeenCalledWith(true, {dateOfBirth: '2018-11-11'}, 2)
     })
+
+    it('calls onChange when dob is empty', () => {
+      const autocompleter = renderAutocompleter({
+        onChange,
+        onSearch,
+        isAdvancedSearchOn: true,
+        canSearch: true,
+        personSearchFields: {
+          dateOfBirth: '2018-11-11',
+        },
+        results: [
+          {person: 'one'},
+          {person: 'two'},
+        ],
+      })
+      const personSearchFields = autocompleter.find('PersonSearchFields')
+      personSearchFields.props().onKeyUp({target: {value: ''}})
+      expect(onChange).toHaveBeenCalledWith('dateOfBirth', '')
+    })
+
+    it('calls onChange when dob is null', () => {
+      const autocompleter = renderAutocompleter({
+        onChange,
+        onSearch,
+        isAdvancedSearchOn: true,
+        canSearch: true,
+        personSearchFields: {
+          dateOfBirth: null,
+        },
+        results: [
+          {person: 'one'},
+          {person: 'two'},
+        ],
+      })
+      const personSearchFields = autocompleter.find('PersonSearchFields')
+      personSearchFields.props().onKeyUp({target: {value: null}})
+      expect(onChange).toHaveBeenCalledWith('dateOfBirth', '')
+    })
+
+    it('calls onChange when dob is undefined', () => {
+      const autocompleter = renderAutocompleter({
+        onChange,
+        onSearch,
+        isAdvancedSearchOn: true,
+        canSearch: true,
+        personSearchFields: {
+          dateOfBirth: undefined,
+        },
+        results: [
+          {person: 'one'},
+          {person: 'two'},
+        ],
+      })
+      const personSearchFields = autocompleter.find('PersonSearchFields')
+      personSearchFields.props().onKeyUp({target: {value: undefined}})
+      expect(onChange).toHaveBeenCalledWith('dateOfBirth', '')
+    })
   })
 
   describe('handleSubmit', () => {
