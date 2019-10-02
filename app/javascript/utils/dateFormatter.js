@@ -26,5 +26,7 @@ export function dateRangeFormatter({start_date, end_date}) {
 }
 
 export function isValidDate(date) {
+  console.log('dob is ' + date)
+  console.log('example: ' + moment('02/02/2000', 'MM/DD/YYYY', true).isValid())
   return moment(date, 'MM/DD/YYYY', true).isValid()
 }

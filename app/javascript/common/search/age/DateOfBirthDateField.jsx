@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import DateField from 'common/DateField'
+import DateOfBirthDateContainer from 'containers/snapshot/DateOfBirthFieldContainer'
 
 class DateOfBirthDateField extends React.Component {
   render() {
@@ -9,18 +10,20 @@ class DateOfBirthDateField extends React.Component {
     const handleChange = value => onChange('dateOfBirth', value)
 
     return (
-      <DateField
-        id="search-date-of-birth"
-        gridClassName="date-field"
-        label="Date"
-        value={value}
-        onBlur={handleBlur}
-        onChange={handleChange}
-        hasTime={false}
-        errors={errors}
-        onKeyUp={onKeyUp}
-        onKeyPress={onKeyPress}
-      />
+      // <DateOfBirthDateFieldContainer>
+        <DateField
+          id="search-date-of-birth"
+          gridClassName="date-field"
+          label="Date"
+          value={value}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          hasTime={false}
+          errors={errors}
+          onKeyUp={onKeyUp}
+          onKeyPress={onKeyPress}
+        />
+      // </DateOfBirthDateFieldContainer>
     )
   }
 }
