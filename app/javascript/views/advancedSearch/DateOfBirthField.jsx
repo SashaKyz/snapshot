@@ -19,15 +19,22 @@ class DateOfBirthField extends React.Component {
     return (
       <div>
         <label htmlFor='search-date-of-birth_input'>Date</label>
-        <Field name='dateOfBirth' render={({field: {value, onChange, ...fields}, form: {setFieldValue}}) =>
+        <Field name='dateOfBirth' render={({field: {value, onChange, ...fields}, form: {setFieldValue}}) => {
+          return (
           <DateTimePicker
             {...fields}
             id='search-date-of-birth'
             value={this.state.value}
-            onChange={value => this.setState({value}, () => setFieldValue('dateOfBirth', value ? moment(value).format('YYYY-MM-DD') : null))}
+            parse={(v) => {
+              const isValid = moment(v).isValid()
+              const fieldValue = isValid ? moment(v).format('YYYY-MM-DD') : v
+              setFieldValue('dateOfBirth', fieldValue)
+              return new Date(v)
+            }}
+            onChange={value => this.setState({value})}
             placeholder='MM/DD/YYYY'
             time={false}
-          />}
+          />)} }
         />
         <ErrorMessage name='dateOfBirth' render={(errors, touched) => <ErrorMessages errors={errors}/>} />
       </div>
