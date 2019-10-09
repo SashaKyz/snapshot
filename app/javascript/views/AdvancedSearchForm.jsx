@@ -47,6 +47,7 @@ class AdvancedSearchForm extends React.Component {
           initialValues={this.initialValues}
           onSubmit={(values, actions) => onSearch(values)}
           validateOnChange={true}
+          validateOnBlur={true}
           validate={values => {
             try {
               validationSchema.validateSync(values, {abortEarly: false})
