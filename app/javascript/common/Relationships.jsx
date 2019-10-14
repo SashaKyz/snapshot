@@ -16,6 +16,7 @@ export const Relationships = ({
   pendingPeople = [],
   people,
   relationshipsButtonStatus,
+  county,
 }) => (
   <div className="card-body no-pad-top">
     {people.map((person, index) => (
@@ -46,6 +47,7 @@ export const Relationships = ({
                       participants={participants}
                       pendingPeople={pendingPeople}
                       relationship={relationship}
+                      county={county}
                     />
                   </li>
                 ))}
@@ -67,6 +69,7 @@ export const Relationships = ({
 
 Relationships.propTypes = {
   candidates: CandidatesPropType,
+  county: PropTypes.string,
   editFormRelationship: PropTypes.shape({
     absent_parent_indicator: PropTypes.bool,
     client_id: PropTypes.string,
