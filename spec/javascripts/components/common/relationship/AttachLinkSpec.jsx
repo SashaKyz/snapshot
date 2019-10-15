@@ -1,6 +1,7 @@
 import React from 'react'
 import {shallow} from 'enzyme'
 import AttachLink from 'common/relationship/AttachLink'
+import * as Analytics from 'utils/analytics'
 
 describe('AttachLink', () => {
   const defaultProps = {
@@ -12,6 +13,7 @@ describe('AttachLink', () => {
       person_card_exists: true,
       legacy_descriptor: {legacy_id: '1'},
     },
+    county: 'county',
   }
   const renderAttachLink = (
     participants = [],
@@ -44,6 +46,7 @@ describe('AttachLink', () => {
   })
 
   it('calls onClick when the Attach Link is clicked', () => {
+    spyOn(Analytics, 'logEvent')
     const onClick = jasmine.createSpy('onClick')
     renderAttachLink([], [], onClick).simulate('click')
     expect(onClick).toHaveBeenCalled()
@@ -54,8 +57,10 @@ describe('AttachLink', () => {
         person_card_exists: true,
         legacy_descriptor: {legacy_id: '1'},
       },
-      '1'
     )
+    expect(Analytics.logEvent).toHaveBeenCalledWith('Attach', {
+      staff_county: 'county',
+    })
   })
 
   it('has href and aria-label', () => {

@@ -5,9 +5,10 @@ import {EmptyRelationships, Relationships} from 'common/Relationships'
 
 describe('Relationships for Snapshot', () => {
   const onClick = jasmine.createSpy('onClick')
+  const county = 'county'
   const renderRelationships = props =>
     shallow(
-      <Relationships {...props} isScreening={false} onClick={onClick} />,
+      <Relationships {...props} isScreening={false} onClick={onClick} county={county} />,
       {disableLifecycleMethods: true}
     )
 
@@ -89,6 +90,7 @@ describe('Relationships for Snapshot', () => {
       pendingPeople,
     }).find(AttachLink)
     expect(component.length).toBe(4)
+    expect(component.at(0).prop('county')).toEqual('county')
     expect(component.at(0).prop('relationship')).toEqual({
       name: 'Jane Johnson',
       type: 'mother',

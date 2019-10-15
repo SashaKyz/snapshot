@@ -1,13 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import {logEvent} from 'utils/analytics'
 
-const attachLink = (onClick, relationship, maybeId) => (
+const attachLink = (onClick, relationship, county) => (
   <a
     href="#relationships-list"
     aria-label="Attach Relationship"
     className="hidden-print"
     onClick={() => {
-      onClick(relationship, maybeId)
+      logEvent('Attach', {
+        staff_county: county,
+      })
+      onClick(relationship)
     }}
   >
     &nbsp;Attach
@@ -37,15 +41,14 @@ export const AttachLink = ({
   pendingPeople,
   relationship,
   screeningId,
+  county,
 }) => {
   if (
     relationship.person_card_exists &&
     !isPending(relationship, pendingPeople) &&
     !isParticipant(relationship, participants)
   ) {
-    return isScreening ?
-      attachLink(onClick, relationship, screeningId) :
-      attachLink(onClick, relationship)
+    return attachLink(onClick, relationship, county)
   } else {
     return null
   }
