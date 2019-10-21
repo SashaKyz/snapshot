@@ -2,6 +2,7 @@ import React from 'react'
 import SearchResultsTable from 'common/search/SearchResultsTable'
 import {mount} from 'enzyme'
 import ReactTooltip from 'react-tooltip'
+import * as Analytics from 'utils/analytics'
 
 const defaultMockedResults = [
   {
@@ -235,6 +236,15 @@ describe('SearchResultsTable', () => {
       const cell = row.find('div.rt-td').at(1)
       cell.find('button').props().onClick()
       expect(onAuthorize).toHaveBeenCalledWith('6j6DKYI0Ki')
+    })
+
+    it('logs searchResultClick event', () => {
+      spyOn(Analytics, 'logEvent')
+      const wrapper = render({results: defaultMockedResults})
+      const row = wrapper.find('div.rt-tr-group').at(0)
+      const cell = row.find('div.rt-td').at(1)
+      cell.find('button').props().onClick()
+      expect(Analytics.logEvent).toHaveBeenCalledWith('searchResultClick', {})
     })
   })
 })

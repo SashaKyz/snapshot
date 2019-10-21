@@ -11,6 +11,7 @@ import DateOfBirthTableHeader from 'common/search/DateOfBirthTableHeader'
 import CountyTableHeader from 'common/search/CountyTableHeader'
 import InfoMessage from 'common/search/InfoMessage'
 import {removeHtmlTags} from 'utils/textFormatter'
+import * as Analytics from 'utils/analytics'
 
 const commonStyle = {headerClassName: 'search-results-header'}
 
@@ -41,7 +42,14 @@ class SearchResultsTable extends React.Component {
             <ReactTooltip id='Sensitive' className="custom-tool-tip" />
             {person.isSealed && <span data-tip="Sealed" data-for="Sealed">&nbsp;<i className="fa fa-eye-slash search-information-flag" aria-hidden="true"/></span>}
             <ReactTooltip id='Sealed' className="custom-tool-tip" />
-            <button className='person-search-detail-link' onClick={() => onAuthorize(id)}>{personFullName}</button>
+            <button className='person-search-detail-link' onClick={
+              () => {
+                Analytics.logEvent('searchResultClick', {})
+                onAuthorize(id)
+              }}
+            >
+              {personFullName}
+            </button>
             <span>{akaFullName}</span>
           </div>
         )
