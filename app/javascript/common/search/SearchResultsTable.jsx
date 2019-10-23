@@ -16,7 +16,7 @@ import * as Analytics from 'utils/analytics'
 const commonStyle = {headerClassName: 'search-results-header'}
 
 class SearchResultsTable extends React.Component {
-  columns = (onAuthorize) => [
+  columns = (onAuthorize, staffId, county) => [
     {
       Header: '',
       id: 'row',
@@ -44,7 +44,7 @@ class SearchResultsTable extends React.Component {
             <ReactTooltip id='Sealed' className="custom-tool-tip" />
             <button className='person-search-detail-link' onClick={
               () => {
-                Analytics.logEvent('searchResultClick', {})
+                Analytics.logEvent('searchResultClick', {staffId, staff_county: county})
                 onAuthorize(id)
               }}
             >
@@ -105,7 +105,7 @@ class SearchResultsTable extends React.Component {
   ]
 
   render() {
-    const {results, total, onAuthorize} = this.props
+    const {results, total, onAuthorize, staffId, county} = this.props
     const onPageChange = () => ReactTooltip.rebuild()
     return (
       <Fragment>
@@ -113,7 +113,7 @@ class SearchResultsTable extends React.Component {
         <InfoMessage total={results.length} />
         {results.length > 0 &&
         <ReactTable
-          columns={this.columns(onAuthorize)}
+          columns={this.columns(onAuthorize, staffId, county)}
           data={results}
           minRows={0}
           defaultPageSize={25}
@@ -125,9 +125,11 @@ class SearchResultsTable extends React.Component {
 }
 
 SearchResultsTable.propTypes = {
+  county: PropTypes.string,
   onAuthorize: PropTypes.func,
   personSearchFields: PropTypes.object,
   results: PropTypes.array,
+  staffId: PropTypes.string,
   total: PropTypes.number,
 }
 
