@@ -10,6 +10,8 @@ const render = ({
   personSearchFields = {},
   onAuthorize = () => {},
   isSearchResults = true,
+  staffId = 'staffId',
+  county = 'county',
 } = {}) => (
   shallow(
     <PersonSearchResults
@@ -18,6 +20,8 @@ const render = ({
       personSearchFields={personSearchFields}
       onAuthorize={onAuthorize}
       isSearchResults={isSearchResults}
+      staffId={staffId}
+      county={county}
     />, {disableLifecycleMethods: true})
 )
 
@@ -31,9 +35,13 @@ describe('PersonSearchResults', () => {
 
     it('sets props on the CardView', () => {
       const onAuthorize = () => {}
+      const staffId = 'staffId'
+      const county = 'county'
       const componentProps = {
         total: 200,
         onAuthorize,
+        staffId,
+        county,
       }
       const component = render(componentProps)
       const cardView = component.find('CardView')
@@ -43,6 +51,8 @@ describe('PersonSearchResults', () => {
         total: 200,
         personSearchFields: {},
         onAuthorize,
+        staffId,
+        county,
       }
       const table = (<SearchResultsTable {...tableProps} />)
       expect(props.id).toEqual('person-search-results-card')

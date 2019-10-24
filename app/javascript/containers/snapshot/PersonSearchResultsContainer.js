@@ -7,6 +7,8 @@ import {
   selectCheckSearchResults,
 } from 'selectors/peopleSearchSelectors'
 import {authorizeSnapshotPerson} from 'actions/personCardActions'
+import {getStaffIdSelector} from 'selectors/userInfoSelectors'
+import {getCountyNameSelector} from 'selectors/userInfoSelectors'
 
 const mapStateToProps = state => {
   return {
@@ -14,6 +16,8 @@ const mapStateToProps = state => {
     total: selectResultsTotalValue(state),
     personSearchFields: selectPersonSearchFields(state),
     isSearchResults: selectCheckSearchResults(state),
+    staffId: getStaffIdSelector(state),
+    county: getCountyNameSelector(state),
   }
 }
 

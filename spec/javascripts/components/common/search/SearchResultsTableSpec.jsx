@@ -108,6 +108,8 @@ const render = (
     personSearchFields = {},
     total = 1,
     onAuthorize = () => {},
+    staffId = 'staffId',
+    county = 'county',
   } = {}) => {
   return mount(
     <SearchResultsTable
@@ -115,6 +117,8 @@ const render = (
       personSearchFields={personSearchFields}
       total={total}
       onAuthorize={onAuthorize}
+      staffId={staffId}
+      county={county}
     />, {disableLifecycleMethods: true})
 }
 
@@ -244,7 +248,7 @@ describe('SearchResultsTable', () => {
       const row = wrapper.find('div.rt-tr-group').at(0)
       const cell = row.find('div.rt-td').at(1)
       cell.find('button').props().onClick()
-      expect(Analytics.logEvent).toHaveBeenCalledWith('searchResultClick', {})
+      expect(Analytics.logEvent).toHaveBeenCalledWith('searchResultClick', {staffId: 'staffId', staff_county: 'county'})
     })
   })
 })

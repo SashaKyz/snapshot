@@ -11,6 +11,8 @@ const PersonSearchResults = (
     results,
     onAuthorize,
     isSearchResults,
+    staffId,
+    county,
   }) => {
   const resultsLimit = 250
   const totalResults = total > resultsLimit ? '250+' : total
@@ -27,6 +29,8 @@ const PersonSearchResults = (
           total={total}
           personSearchFields={personSearchFields}
           onAuthorize={onAuthorize}
+          staffId={staffId}
+          county={county}
         />
       }
     />
