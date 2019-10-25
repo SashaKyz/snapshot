@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import DateField from 'common/DateField'
+import DateFieldStateful from 'common/DateFieldStateful'
 
 class DateOfBirthDateField extends React.Component {
   render() {
@@ -8,8 +9,24 @@ class DateOfBirthDateField extends React.Component {
     const handleBlur = () => onBlur('dateOfBirth')
     const handleChange = value => onChange('dateOfBirth', value)
 
+
+    // return (
+    //   <DateField
+    //     id="search-date-of-birth"
+    //     gridClassName="date-field"
+    //     label="Date"
+    //     value={value}
+    //     onBlur={handleBlur}
+    //     onChange={handleChange}
+    //     hasTime={false}
+    //     errors={errors}
+    //     onKeyUp={onKeyUp}
+    //     onKeyPress={onKeyPress}
+    //   />
+    // )
+
     return (
-      <DateField
+      <DateFieldStateful
         id="search-date-of-birth"
         gridClassName="date-field"
         label="Date"
