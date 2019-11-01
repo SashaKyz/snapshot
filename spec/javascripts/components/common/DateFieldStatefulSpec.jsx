@@ -2,7 +2,7 @@ import React from 'react'
 import {shallow, mount} from 'enzyme'
 import DateFieldStateful from 'common/DateFieldStateful'
 
-fdescribe('DateFieldStateful', () => {
+describe('DateFieldStateful', () => {
   function mountDateFieldStateful({
     gridClassName,
     hasCalendar,

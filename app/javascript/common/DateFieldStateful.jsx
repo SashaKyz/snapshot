@@ -15,7 +15,7 @@ class DateFieldStateful extends React.Component {
     this.state = {
       errors: this.props.errors,
       value: this.props.value,
-      shadowValue: this.props.value
+      shadowValue: this.props.value,
     }
   }
 
@@ -35,7 +35,7 @@ class DateFieldStateful extends React.Component {
 
   handleOnBlur() {
     if (!_.isEmpty(this.state.shadowValue) && Number.isNaN(Date.parse(this.state.shadowValue))) {
-      this.setState({errors: ["Please enter a valid date"]})
+      this.setState({errors: ['Please enter a valid date']})
     } else {
       this.setState({errors: []})
     }
@@ -44,19 +44,19 @@ class DateFieldStateful extends React.Component {
   }
 
   handleOnKeyUp(event) {
-      if ((event.target.value === '') || (event.target.value === undefined) || (event.target.value === null)) {
-        this.props.onChange('')
-        this.setState({
-          value: null,
-          shadowValue: null
-        })
-      } else if (isValidDate(event.target.value)) {
-        this.setState({
-          value: moment(event.target.value, 'MM/DD/YYYY').toDate(),
-          shadowValue: null
-        })
-        this.props.onChange(moment(event.target.value, 'MM/DD/YYYY').format('YYYY-MM-DD'))
-      }
+    if ((event.target.value === '') || (event.target.value === undefined) || (event.target.value === null)) {
+      this.props.onChange('')
+      this.setState({
+        value: null,
+        shadowValue: null,
+      })
+    } else if (isValidDate(event.target.value)) {
+      this.setState({
+        value: moment(event.target.value, 'MM/DD/YYYY').toDate(),
+        shadowValue: null,
+      })
+      this.props.onChange(moment(event.target.value, 'MM/DD/YYYY').format('YYYY-MM-DD'))
+    }
   }
 
   currentErrors() {
@@ -86,8 +86,8 @@ class DateFieldStateful extends React.Component {
           onBlur={() => this.handleOnBlur()}
           onChange={value => this.handleOnChange(value)}
           placeholder={'MM/DD/YYYY'}
-          parse={ input => {
-            this.setState({ shadowValue: input})
+          parse={input => {
+            this.setState({shadowValue: input})
           }}
           required={this.props.required}
           time={this.props.hasTime}

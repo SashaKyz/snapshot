@@ -9,7 +9,6 @@ class DateOfBirthDateField extends React.Component {
     const handleBlur = () => onBlur('dateOfBirth')
     const handleChange = value => onChange('dateOfBirth', value)
 
-
     // return (
     //   <DateField
     //     id="search-date-of-birth"
