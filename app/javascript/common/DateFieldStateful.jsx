@@ -60,10 +60,10 @@ class DateFieldStateful extends React.Component {
   }
 
   currentErrors() {
-    if (!_.isEmpty(this.props.errors)) {
-      return this.props.errors
-    } else {
+    if (_.isEmpty(this.props.errors)) {
       return this.state.errors
+    } else {
+      return this.props.errors
     }
   }
 
