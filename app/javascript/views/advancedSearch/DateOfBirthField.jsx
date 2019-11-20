@@ -26,7 +26,7 @@ class DateOfBirthField extends React.Component {
             id='search-date-of-birth'
             value={this.state.value}
             parse={(v) => {
-              const isValid = moment(v).isValid()
+              const isValid = moment(v, 'MM/DD/YYYY').isValid()
               const fieldValue = isValid ? moment(v).format('YYYY-MM-DD') : v
               setFieldValue('dateOfBirth', fieldValue)
               return new Date(v)
