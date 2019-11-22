@@ -1,6 +1,7 @@
 import React from 'react'
 import {shallow, mount} from 'enzyme'
 import DateFieldStateful from 'common/DateFieldStateful'
+import moment from 'moment-timezone'
 
 describe('DateFieldStateful', () => {
   function mountDateFieldStateful({
@@ -142,6 +143,49 @@ describe('DateFieldStateful', () => {
       const instance = component.instance()
       instance.handleOnChange(date)
       expect(instance.state.value).toEqual(date)
+    })
+  })
+
+  describe('onKeyUp', () => {
+    it('calls onChange and sets value to null when dob is empty', () => {
+      const onChange = jasmine.createSpy('onChange')
+      const component = shallow(<DateFieldStateful onChange={onChange} />)
+      const instance = component.instance()
+      instance.handleOnKeyUp({target: {value: ''}})
+      expect(onChange).toHaveBeenCalledWith('')
+      expect(instance.state.value).toEqual(null)
+      expect(instance.state.shadowValue).toEqual(null)
+    })
+
+    it('calls onChange and sets value to null when dob is null', () => {
+      const onChange = jasmine.createSpy('onChange')
+      const component = shallow(<DateFieldStateful onChange={onChange} />)
+      const instance = component.instance()
+      instance.handleOnKeyUp({target: {value: null}})
+      expect(onChange).toHaveBeenCalledWith('')
+      expect(instance.state.value).toEqual(null)
+      expect(instance.state.shadowValue).toEqual(null)
+    })
+
+    it('calls onChange and sets value to null when dob is undefined', () => {
+      const onChange = jasmine.createSpy('onChange')
+      const component = shallow(<DateFieldStateful onChange={onChange} />)
+      const instance = component.instance()
+      instance.handleOnKeyUp({target: {value: undefined}})
+      expect(onChange).toHaveBeenCalledWith('')
+      expect(instance.state.value).toEqual(null)
+      expect(instance.state.shadowValue).toEqual(null)
+    })
+
+    it('sets the value and calls onChange when dob is a valid date', () => {
+      const date = '10/10/2000'
+      const onChange = jasmine.createSpy('onChange')
+      const component = shallow(<DateFieldStateful onChange={onChange} />)
+      const instance = component.instance()
+      instance.handleOnKeyUp({target: {value: date}})
+      expect(onChange).toHaveBeenCalledWith(moment(date, 'MM/DD/YYYY').format('YYYY-MM-DD'))
+      expect(instance.state.value).toEqual(moment(date, 'MM/DD/YYYY').toDate())
+      expect(instance.state.shadowValue).toEqual(null)
     })
   })
 })
