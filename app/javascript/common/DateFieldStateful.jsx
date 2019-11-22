@@ -20,10 +20,6 @@ class DateFieldStateful extends React.Component {
   }
 
   handleOnChange(date) {
-    if (date === undefined) {
-      date = this.state.value
-    }
-
     this.setState({value: date})
     if (date === null) {
       this.props.onChange(null)
@@ -34,8 +30,8 @@ class DateFieldStateful extends React.Component {
   }
 
   handleOnBlur() {
-    if (!_.isEmpty(this.state.shadowValue) && Number.isNaN(Date.parse(this.state.shadowValue))) {
-      this.setState({errors: ['Please enter a valid date']})
+    if (!_.isEmpty(this.state.shadowValue) && !moment(this.state.shadowValue, 'MM/DD/YYYY').isValid()) {
+      this.setState({errors: ['Please enter a valid date'], value: null})
     } else {
       this.setState({errors: []})
     }
@@ -89,6 +85,7 @@ class DateFieldStateful extends React.Component {
           parse={input => {
             this.setState({shadowValue: input})
           }}
+          onSelect={input => { this.setState({shadowValue: input, value: new Date(input)}) }}
           required={this.props.required}
           time={this.props.hasTime}
           max={this.props.max}
