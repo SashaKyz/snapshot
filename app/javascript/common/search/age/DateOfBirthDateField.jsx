@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import DateField from 'common/DateField'
+import DateFieldStateful from 'common/DateFieldStateful'
 
 class DateOfBirthDateField extends React.Component {
   render() {
@@ -9,7 +9,7 @@ class DateOfBirthDateField extends React.Component {
     const handleChange = value => onChange('dateOfBirth', value)
 
     return (
-      <DateField
+      <DateFieldStateful
         id="search-date-of-birth"
         gridClassName="date-field"
         label="Date"

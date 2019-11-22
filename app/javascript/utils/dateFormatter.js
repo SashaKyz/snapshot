@@ -25,6 +25,22 @@ export function dateRangeFormatter({start_date, end_date}) {
     .join(' - ') || 'No Date'
 }
 
+const dateFormats = [
+  'MM/DD/YYYY',
+  'M/DD/YYYY',
+  'MM/D/YYYY',
+  'M/D/YYYY',
+  'M-DD-YYYY',
+  'MM-DD-YYYY',
+  'M-D-YYYY',
+  'MM-D-YYYY',
+  'MMDDYYYY',
+]
+
 export function isValidDate(date) {
-  return moment(date, 'MM/DD/YYYY', true).isValid()
+  return moment(date, dateFormats, true).isValid()
+}
+
+export function dateFormatToYYYYMMDD(date) {
+  return moment.tz(date, [...dateFormats], 'America/Los_Angeles').local().format('YYYY-MM-DD')
 }
