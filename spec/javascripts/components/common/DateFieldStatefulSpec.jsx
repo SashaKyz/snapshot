@@ -43,12 +43,26 @@ describe('DateFieldStateful', () => {
       expect(instance.state.errors).toEqual([])
     })
 
-    it('clears errors if the shadowvalue is valid', () => {
+    it('clears errors if the shadowvalue is valid with slashes', () => {
       const component = renderDateFieldStateful({value: '10/10/2000'})
       const instance = component.instance()
       instance.handleOnBlur()
       expect(instance.props.onBlur).toHaveBeenCalled()
       expect(instance.state.errors).toEqual([])
+    })
+
+    it('sets an error for an invalid date when there are less than 10 characters entered', () => {
+      const component = renderDateFieldStateful({value: '1234567'})
+      const instance = component.instance()
+      instance.handleOnBlur()
+      expect(instance.state.errors).toEqual(['Please enter a valid date'])
+    })
+
+    it('sets an error for an invalid date when there are less than 4 characters entered', () => {
+      const component = renderDateFieldStateful({value: '123'})
+      const instance = component.instance()
+      instance.handleOnBlur()
+      expect(instance.state.errors).toEqual(['Please enter a valid date'])
     })
   })
 

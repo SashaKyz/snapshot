@@ -9,6 +9,8 @@ import {isValidDate, dateFormatToYYYYMMDD} from 'utils/dateFormatter'
 
 momentLocalizer(moment)
 
+const dateLength = 10
+
 class DateFieldStateful extends React.Component {
   constructor(props) {
     super(props)
@@ -30,10 +32,11 @@ class DateFieldStateful extends React.Component {
   }
 
   handleOnBlur() {
-    if (!_.isEmpty(this.state.shadowValue) && !moment(this.state.shadowValue, 'MM/DD/YYYY').isValid()) {
-      this.setState({errors: ['Please enter a valid date'], value: null})
-    } else {
+    const {shadowValue} = this.state
+    if (_.isEmpty(this.state.shadowValue) || (shadowValue.length === dateLength && moment(shadowValue, 'MM/DD/YYYY').isValid())) {
       this.setState({errors: []})
+    } else {
+      this.setState({errors: ['Please enter a valid date'], value: null})
     }
 
     this.props.onBlur()
@@ -84,6 +87,7 @@ class DateFieldStateful extends React.Component {
           placeholder={'MM/DD/YYYY'}
           parse={input => {
             this.setState({shadowValue: input})
+            return new Date(input)
           }}
           onSelect={input => { this.setState({shadowValue: input, value: new Date(input)}) }}
           required={this.props.required}
