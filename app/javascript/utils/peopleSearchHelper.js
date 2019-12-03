@@ -27,9 +27,9 @@ export const mapLanguages = (state, result) => buildSelector(
   )
 )(state)
 
-export const mapIsSensitive = (result) => (result.get('sensitivity_indicator', '').toUpperCase() === 'S')
-export const mapIsSealed = (result) => (result.get('sensitivity_indicator', '').toUpperCase() === 'R')
-export const mapIsProbationYouth = (result) => (result.get('open_case_responsible_agency_code', '').toUpperCase() === 'P')
+export const mapIsSensitive = (result) => ((result.get('sensitivity_indicator') || '').toUpperCase() === 'S')
+export const mapIsSealed = (result) => ((result.get('sensitivity_indicator') || '').toUpperCase() === 'R')
+export const mapIsProbationYouth = (result) => ((result.get('open_case_responsible_agency_code') || '').toUpperCase() === 'P')
 
 export const mapRaces = (state, result) => buildSelector(
   selectEthnicityTypes,
