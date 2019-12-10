@@ -27,11 +27,12 @@ class DateOfBirthField extends React.Component {
             value={this.state.value}
             parse={(v) => {
               const isValid = moment(v, 'MM/DD/YYYY').isValid()
-              const fieldValue = isValid ? moment(v).format('YYYY-MM-DD') : v
+              const fieldValue = isValid ? moment(v, 'MM/DD/YYYY').toDate() : v
               setFieldValue('dateOfBirth', fieldValue)
-              return new Date(v)
+              return new Date(fieldValue)
             }}
-            onChange={value => this.setState({value})}
+            onSelect={value => this.setState({value}, () => setFieldValue('dateOfBirth', moment(value,'MM/DD/YYYY').toDate()))}
+            onChange={value => this.setState({value}, () => setFieldValue('dateOfBirth', moment(value, 'MM/DD/YYYY').toDate()))}
             placeholder='MM/DD/YYYY'
             time={false}
           />)} }
