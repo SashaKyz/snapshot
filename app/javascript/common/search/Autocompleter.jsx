@@ -205,7 +205,7 @@ export default class Autocompleter extends Component {
   }
 
   renderPersonSearchFields() {
-    const {total, onChange, onCancel, onBlur, onFocus, personSearchFields, isAdvancedSearchOn, clientIdError, ssnErrors, dobErrors, canSearch, counties, isFetching} = this.props
+    const {total, onChange, onCancel, onBlur, onFocus, personSearchFields, clientIdError, ssnErrors, dobErrors, canSearch, counties, isFetching} = this.props
     const searchWithEnter = (e) => {
       const enterKeyCode = 13
       if ((canSearch && e.charCode === enterKeyCode)) { this.handleSubmit() }
@@ -222,7 +222,7 @@ export default class Autocompleter extends Component {
         onCancel={onCancel}
         onSubmit={this.handleSubmit}
         personSearchFields={personSearchFields}
-        isAdvancedSearchOn={isAdvancedSearchOn}
+        isAdvancedSearchOn={false}
         clientIdError={clientIdError}
         ssnErrors={ssnErrors}
         dobErrors={dobErrors}

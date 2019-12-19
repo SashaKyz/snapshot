@@ -6,6 +6,7 @@ import {PersonSearchFieldsPropType} from 'data/personSearch'
 import {isAdvancedSearchOn} from 'common/config'
 import ModalComponent from 'common/ModalComponent'
 import SearchModalBody from 'common/search/SearchModalBody'
+import AdvancedSearchForm from 'views/AdvancedSearchForm'
 
 class PersonSearchForm extends React.Component {
   constructor(props) {
@@ -66,6 +67,7 @@ class PersonSearchForm extends React.Component {
               {!advancedSearchFeatureFlag && <label className='pull-left autocompleter-label' htmlFor='screening_participants'>{searchPrompt}</label>}
               <label className='autocompleter-label' htmlFor='screening_participants'>Search</label>
               <Autocompleter id="screening_participants" {...autocompleterProps} isAdvancedSearchOn={advancedSearchFeatureFlag} />
+              { advancedSearchFeatureFlag && <AdvancedSearchForm /> }
             </div>
           </div>
         </div>
